@@ -45,8 +45,8 @@ Using programmatic SEO approach:
 ### 2.1 AI Content Pipeline
 
 ```
-Keyword Research → Content Brief → AI Draft → AI Review → Web Search Review → Human Review → Publish
-     (AI)            (AI)           (AI)        (AI)         (AI + Web)         (Human)      (Auto)
+Keyword Research → Content Brief → AI Draft → AI Review → Web Search Review → Auto-Fix → Publish
+     (AI)            (AI)           (AI)        (AI)         (AI + Web)        (Auto)      (Auto)
 ```
 
 ### 2.2 Automated Workflow Steps
@@ -84,16 +84,17 @@ Keyword Research → Content Brief → AI Draft → AI Review → Web Search Rev
    - **Multi-Source Cross-Validation**: 對每個事實聲明至少找 2 個獨立來源交叉驗證
    - **輸出**: 生成「事實核查報告」，包含：✅ 已驗證聲明、⚠️ 需人工確認、❌ 發現矛盾/過時
 
-6. **Human Review** (Human)
-   - **審閱 AI 審查報告**: 處理 AI 標記的「需人工處理」項目
-   - **審閱事實核查報告**: 確認 Web Search Review 標記的 ⚠️ 和 ❌ 項目
-   - **最終事實確認**: 對不確定的聲明進行最終核對
-   - **本地化潤飾**: 加入香港地道用語、個人經驗、真實案例
-   - **產品植入調整**: 確保 My O! 證書套提及自然（不超過 20% 篇幅）
-   - **品牌語氣審核**: 確認語氣符合 My O! 品牌定位
-   - **最終批准**: 確認無誤後批准發布
+6. **🆕 Auto-Fix & Optimization** (AI)
+   - **自動修復 AI Review 標記問題**: 修正語法、SEO 不合規、AI Slop
+   - **自動處理 Web Search Review ⚠️ 項目**: 加入「資料可能變動」免責聲明、更新過時資訊
+   - **自動處理 ❌ 矛盾項目**: 以 Tier 0-1 來源為準自動修正內容
+   - **自動本地化**: 加入香港地道用語、常見表達方式
+   - **自動產品植入調整**: 確保 My O! 證書套提及自然（不超過 20% 篇幅）
+   - **自動品牌語氣優化**: 調整語氣符合 My O! 品牌定位
+   - **自動生成 HTML**: 從 markdown 模板生成完整 HTML
+   - **自動更新 sitemap.xml**: 加入新文章 URL
 
-7. **HTML Generation & Publish** (Auto)
+7. **Publish & Monitor** (Auto)
    - Auto-generate HTML from markdown template
    - Update sitemap.xml automatically
    - Deploy to GitHub Pages
@@ -301,14 +302,16 @@ Keyword Research → Content Brief → AI Draft → AI Review → Web Search Rev
 | **外部連結** | 全部返回 200 | 自動 HTTP 檢查 |
 | **多源驗證** | 每事實聲明 ≥ 2 獨立來源 | Exa + Web Fetch 交叉驗證 |
 
-#### Phase 3: Human Review（人工）
+#### Phase 3: Auto-Fix（AI 自動修復）
 | 檢查項 | 標準 | 驗證方式 |
 |--------|------|----------|
-| **最終事實確認** | 處理 AI/Web 標記的 ⚠️ 和 ❌ 項目 | 人工核對 |
-| **本地化潤飾** | 加入地道用語、個人經驗 | 人工編輯 |
-| **產品植入自然度** | My O! 提及不超過 20% | 人工審核 |
-| **品牌語氣** | 符合 My O! 品牌定位 | 人工審核 |
-| **最終批准** | 所有檢查項通過 | 人工批准 |
+| **自動修復 AI 問題** | 修正語法、SEO 不合規、AI Slop | AI 自動執行 |
+| **自動處理 ⚠️ 項目** | 加入免責聲明、更新過時資訊 | AI 自動執行 |
+| **自動處理 ❌ 矛盾** | 以 Tier 0-1 來源為準修正 | AI 自動執行 |
+| **自動本地化** | 加入香港地道用語 | AI 自動執行 |
+| **產品比例調整** | My O! 提及不超過 20% | AI 自動調整 |
+| **品牌語氣優化** | 符合 My O! 品牌定位 | AI 自動調整 |
+| **HTML 生成** | 完整 HTML 文件 | AI 自動生成 |
 
 ### 6.2 Performance Monitoring
 
@@ -347,11 +350,18 @@ Keyword Research → Content Brief → AI Draft → AI Review → Web Search Rev
 ### 7.2 Content Management Workflow
 
 ```
-AI Research → Content Brief → AI Draft → AI Review → Web Search Review → Human Review → Publish
+AI Research → Content Brief → AI Draft → AI Review → Web Search Review → Auto-Fix → Publish
       ↓             ↓             ↓            ↓              ↓              ↓             ↓
-  Keyword DB   Template DB   Draft DB    AI Review Log   Fact Check    Approval Log   GitHub Pages
-                                                    Report          Report
+  Keyword DB   Template DB   Draft DB    AI Review Log   Fact Check    Auto-Fix Log   GitHub Pages
+                                                    Report
 ```
+
+**Auto-Fix Actions**:
+- ✅ AI Review issues: auto-fix grammar, SEO, structure
+- ⚠️ Web Search warnings: add disclaimers, update stale data
+- ❌ Contradictions: auto-correct to match Tier 0-1 sources
+- 🔄 Localization: add HK colloquial terms, brand voice
+- 📦 HTML generation: markdown → complete HTML file
 
 **AI Review Output**:
 - ✅ Auto-fixed: formatting, punctuation, minor grammar
