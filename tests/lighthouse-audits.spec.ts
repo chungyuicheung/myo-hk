@@ -128,7 +128,7 @@ test.describe('Lighthouse audit fixes', () => {
   // ====================================================
   // TEST: Inter woff2 font files should be preloaded
   // ====================================================
-  test('Inter woff2 font files should be preloaded with fetchpriority=low', async ({ page }) => {
+  test('Inter woff2 font files should be preloaded with fetchpriority=high', async ({ page }) => {
     await page.goto('/');
 
     const fontPreloads = await page.evaluate(() => {
@@ -209,5 +209,67 @@ test.describe('Lighthouse audit fixes', () => {
         expect(contrastRatio).toBeGreaterThan(4.5);
       }
     }
+  });
+
+  // ====================================================
+  // TEST: Cumulative Layout Shift should be ≤ 0.05
+  // ====================================================
+  test('Cumulative Layout Shift should be within acceptable range', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    const cls = await page.evaluate(() => {
+      return new Promise<number>((resolve) => {
+        let clsValue = 0;
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (!(entry as any).hadRecentInput) {
+              clsValue += (entry as any).value;
+            }
+          }
+        });
+        observer.observe({ type: 'layout-shift', buffered: true });
+
+        // Wait a bit for fonts to swap and layout to settle
+        setTimeout(() => {
+          observer.disconnect();
+          resolve(clsValue);
+        }, 2000);
+      });
+    });
+
+    expect(cls).toBeLessThan(0.05);
+  });
+
+  // ====================================================
+  // TEST: Total Blocking Time should be ≤ 100ms
+  // ====================================================
+  test('Total Blocking Time should be within acceptable range', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    const tbt = await page.evaluate(() => {
+      return new Promise<number>((resolve) => {
+        let totalBlocking = 0;
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            const longTask = entry as any;
+            const blockingTime = longTask.duration - 50;
+            if (blockingTime > 0) {
+              totalBlocking += blockingTime;
+            }
+          }
+        });
+        observer.observe({ type: 'longtask', buffered: true });
+
+        setTimeout(() => {
+          observer.disconnect();
+          resolve(totalBlocking);
+        }, 3000);
+      });
+    });
+
+    // On a fast connection, TBT should be minimal
+    expect(tbt).toBeLessThan(100);
   });
 });
