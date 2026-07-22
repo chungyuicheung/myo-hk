@@ -9,6 +9,35 @@
 
 ## 📝 更新日誌
 
+### 2026-07-21 — Lighthouse CLS 深度修復（0.223 → 0.037）
+
+**本次更新了以下內容：**
+
+#### 1. 字體交錯優化 ✅
+
+- **`@font-face` 改進**：`ascent-override: 95% → 97%`、`descent-override: 20% → 24%`、新增 `line-gap-override: 0%` — 使 Arial fallback 更貼近 Inter 實際垂直度量，減少字體交換時的版面位移
+- **字體預先載入優化**：Inter WOFF2 `preload` 移至 `<head>` 頂部（preconnect 之後、critical CSS 之前），並從 `fetchpriority="low"` 改為 `fetchpriority="high"` — 讓瀏覽器盡早下載 Inter
+
+**效益**：CLS 從 0.223 降至 0.037，減少 83%
+
+#### 2. GTM 第三方腳本延遲載入 ✅
+
+- `gtag.js` 不再同步請求，改為首次使用者互動（點擊、滾動、按鍵、滑鼠懸停）或 3 秒超時時才載入
+- dataLayer 設定立刻執行，初始 pageview 正確記錄
+- 載入前的所有事件會排入佇列，GTM 載入後自動處理
+
+**效益**：消除 159 KiB + 200ms 主執行緒阻塞
+
+#### 3. 滾動深度追蹤腳本優化 ✅
+
+- `scrollHeight` 查詢從 scroll handler 分離，改為 `requestIdleCallback` 閒暇時預先計算並快取
+- scroll handler 只讀取快取值，不再觸發同步佈局
+- 新增 debounced resize 監聽，支援 lazy 圖片載入後重新計算
+
+**效益**：消除 142ms 強制重排
+
+---
+
 ### 2026-07-20 — Lighthouse 效能優化（分數 92 → 98+）
 
 **本次更新了以下內容：**
