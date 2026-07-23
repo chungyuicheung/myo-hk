@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My O! — 系統架構圖</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --bg-card: #ffffff;
+      --color-primary: #1a1a2e;
+      --color-secondary: #e94560;
+      --color-tertiary: #0f3460;
+      --color-success: #16c79a;
+      --color-muted: #6b7280;
+      --color-border: #e5e5e5;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --radius: 4px;
+      --transition: 200ms ease-out;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--color-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-secondary);
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      background: var(--bg-card);
+      color: var(--color-primary);
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+
+    .btn.active {
+      background: var(--color-secondary);
+      color: white;
+      border-color: var(--color-secondary);
+    }
+
+    /* Canvas Area */
+    .canvas-container {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+
+    .canvas {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* SVG Flow Lines */
+    .flow-line {
+      stroke: var(--color-muted);
+      stroke-width: 1.5;
+      fill: none;
+      stroke-dasharray: 8 4;
+      animation: flowDash 1s linear infinite;
+    }
+
+    @keyframes flowDash {
+      to { stroke-dashoffset: -12; }
+    }
+
+    .flow-arrow {
+      fill: var(--color-muted);
+    }
+
+    /* Cards */
+    .card {
+      position: absolute;
+      background: var(--bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: scale(1.02);
+      z-index: 10;
+    }
+
+    .card-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .card-body {
+      padding: 12px 16px;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--color-muted);
+      line-height: 1.5;
+    }
+
+    .card-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--bg);
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      margin: 2px;
+    }
+
+    /* Color coding */
+    .card--pages .card-icon { background: #fef3c7; }
+    .card--blog .card-icon { background: #dbeafe; }
+    .card--presentations .card-icon { background: #d1fae5; }
+    .card--assets .card-icon { background: #fce7f3; }
+    .card--scripts .card-icon { background: #e0e7ff; }
+    .card--tests .card-icon { background: #fee2e2; }
+    .card--deploy .card-icon { background: #ccfbf1; }
+
+    /* Legend */
+    .legend {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+      z-index: 50;
+    }
+
+    .legend-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+    }
+
+    /* Help Panel */
+    .help-panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+      z-index: 50;
+      max-width: 280px;
+    }
+
+    .help-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .help-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .help-key {
+      background: var(--bg);
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: fixed;
+      background: var(--color-primary);
+      color: white;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 150ms;
+      z-index: 200;
+      max-width: 300px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tooltip.visible {
+      opacity: 1;
+    }
+
+    /* Stats Badge */
+    .stats-badge {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+      z-index: 50;
+    }
+
+    .stats-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 13px;
+    }
+
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: var(--color-secondary);
+      font-family: var(--font-mono);
+    }
+
+    /* Section Labels */
+    .section-label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-muted);
+      opacity: 0.6;
+    }
+
+    /* Zoom Controls */
+    .zoom-controls {
+      position: fixed;
+      top: 80px;
+      left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 50;
+    }
+
+    .zoom-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 18px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .zoom-btn:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .zoom-level {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    /* Flow Legend */
+    .flow-legend {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      box-shadow: var(--shadow-md);
+      z-index: 50;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .flow-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .flow-legend-line {
+      width: 32px;
+      height: 2px;
+      background: var(--color-muted);
+    }
+
+    .flow-legend-arrow {
+      width: 0;
+      height: 0;
+      border-left: 6px solid var(--color-muted);
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .legend, .help-panel, .stats-badge, .flow-legend {
+        display: none;
+      }
+      .header-title {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <span class="logo">My O!</span>
+      <span class="header-title">— 系統架構圖 Architecture Diagram</span>
+    </div>
+    <div class="header-controls">
+      <button class="btn active" id="view-flow">Flow 流程圖</button>
+      <button class="btn" id="view-structure">Structure 結構圖</button>
+    </div>
+  </header>
+
+  <!-- Zoom Controls -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="zoom-in">+</button>
+    <button class="zoom-btn" id="zoom-out">−</button>
+    <button class="zoom-btn" id="zoom-reset">⟲</button>
+    <span class="zoom-level" id="zoom-level">100%</span>
+  </div>
+
+  <!-- Stats Badge -->
+  <div class="stats-badge">
+    <div class="stats-title">系統數據</div>
+    <div class="stat-item">
+      <span>總頁面</span>
+      <span class="stat-value">425+</span>
+    </div>
+    <div class="stat-item">
+      <span>文章數</span>
+      <span class="stat-value">420+</span>
+    </div>
+    <div class="stat-item">
+      <span>影片專案</span>
+      <span class="stat-value">40</span>
+    </div>
+    <div class="stat-item">
+      <span>分類</span>
+      <span class="stat-value">28</span>
+    </div>
+    <div class="stat-item">
+      <span>自動化腳本</span>
+      <span class="stat-value">10+</span>
+    </div>
+  </div>
+
+  <!-- Main Canvas -->
+  <div class="canvas-container">
+    <div class="canvas" id="canvas"></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-title">組件類型</div>
+    <div class="legend-items">
+      <div class="legend-item">
+        <div class="legend-color" style="background: #fef3c7;"></div>
+        <span>主要頁面</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #dbeafe;"></div>
+        <span>部落格系統</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #d1fae5;"></div>
+        <span>影片展示</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #fce7f3;"></div>
+        <span>靜態資源</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #e0e7ff;"></div>
+        <span>自動化腳本</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #fee2e2;"></div>
+        <span>測試系統</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #ccfbf1;"></div>
+        <span>部署平台</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow Legend -->
+  <div class="flow-legend">
+    <div class="flow-legend-item">
+      <div class="flow-legend-line"></div>
+      <div class="flow-legend-arrow"></div>
+      <span>資料流向</span>
+    </div>
+    <div class="flow-legend-item">
+      <div class="flow-legend-line" style="background: var(--color-secondary);"></div>
+      <div class="flow-legend-arrow" style="border-left-color: var(--color-secondary);"></div>
+      <span>觸發事件</span>
+    </div>
+  </div>
+
+  <!-- Help Panel -->
+  <div class="help-panel">
+    <div class="help-title">操作說明</div>
+    <div class="help-item">
+      <span class="help-key">滾輪</span>
+      <span>縮放</span>
+    </div>
+    <div class="help-item">
+      <span class="help-key">拖曳</span>
+      <span>平移畫布</span>
+    </div>
+    <div class="help-item">
+      <span class="help-key">懸停</span>
+      <span>查看詳情</span>
+    </div>
+    <div class="help-item">
+      <span class="help-key">點擊</span>
+      <span>展開面板</span>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    // Architecture Data
+    const architecture = {
+      nodes: [
+        // === DEPLOYMENT LAYER ===
+        {
+          id: 'github-pages',
+          type: 'deploy',
+          title: 'GitHub Pages',
+          desc: '靜態網站托管平台',
+          icon: '🌐',
+          x: 400,
+          y: 30,
+          w: 200,
+          details: {
+            url: 'https://myo-makeyourown.pages.dev',
+            branch: 'main',
+            cdn: 'Cloudflare CDN'
+          }
+        },
+
+        // === MAIN PAGES LAYER ===
+        {
+          id: 'pages-header',
+          type: 'section',
+          title: '主要頁面',
+          x: 50,
+          y: 120
+        },
+        {
+          id: 'index-html',
+          type: 'pages',
+          title: 'index.html',
+          desc: '首頁原始版 — Tailwind + Swiper 輪播',
+          icon: '🏠',
+          x: 60,
+          y: 160,
+          w: 180,
+          details: {
+            tech: 'Tailwind CSS + Swiper.js',
+            features: ['產品展示', '顏色選擇', '款式展示', '聯絡我們']
+          }
+        },
+        {
+          id: 'v2-html',
+          type: 'pages',
+          title: 'v2.html',
+          desc: '首頁重設計版 — CSS 變量 + 動畫系統',
+          icon: '✨',
+          x: 260,
+          y: 160,
+          w: 180,
+          details: {
+            tech: 'CSS Variables + Playfair Display',
+            features: ['Lightbox 圖片查看', '動畫系統', '步驟指示器', 'prefers-reduced-motion']
+          }
+        },
+        {
+          id: 'poster-html',
+          type: 'pages',
+          title: 'poster.html',
+          desc: 'A5 宣傳單張 — 支援 PDF 列印',
+          icon: '📄',
+          x: 460,
+          y: 160,
+          w: 180,
+          details: {
+            tech: '原生 window.print()',
+            features: ['QR Code 生成', '品牌展示', 'PDF 列印']
+          }
+        },
+        {
+          id: 'heic-converter',
+          type: 'pages',
+          title: 'heic-converter.html',
+          desc: 'HEIC/HEIF 轉圖片工具',
+          icon: '🖼️',
+          x: 660,
+          y: 160,
+          w: 180,
+          details: {
+            tech: 'heic2any + JSZip + FileSaver',
+            features: ['多檔案批次轉換', 'ZIP 下載', '中英雙語']
+          }
+        },
+
+        // === BLOG LAYER ===
+        {
+          id: 'blog-header',
+          type: 'section',
+          title: '部落格系統',
+          x: 50,
+          y: 320
+        },
+        {
+          id: 'blog-index',
+          type: 'blog',
+          title: 'blog/index.html',
+          desc: '教學指南索引 — 搜尋 + 分類篩選',
+          icon: '📚',
+          x: 60,
+          y: 360,
+          w: 200,
+          details: {
+            articles: '420+',
+            categories: '28',
+            features: ['動態搜尋', '分類篩選', '文章計數']
+          }
+        },
+        {
+          id: 'blog-articles',
+          type: 'blog',
+          title: '420+ 文章',
+          desc: '婚禮教學指南文章',
+          icon: '📝',
+          x: 280,
+          y: 360,
+          w: 200,
+          details: {
+            avgWords: '~2,710 字',
+            compliance: '1,500字達標率 100%',
+            categories: '婚禮攝影、傳統習俗、場地、珠寶...'
+          }
+        },
+        {
+          id: 'article-schema',
+          type: 'blog',
+          title: 'JSON-LD Schema',
+          desc: '結構化數據優化',
+          icon: '🔗',
+          x: 500,
+          y: 360,
+          w: 160,
+          details: {
+            types: 'Article + Organization + BreadcrumbList',
+            seo: '完整 meta 標籤 + OG 標籤'
+          }
+        },
+
+        // === PRESENTATIONS LAYER ===
+        {
+          id: 'presentations-header',
+          type: 'section',
+          title: '婚禮影片展示',
+          x: 50,
+          y: 500
+        },
+        {
+          id: 'presentations-index',
+          type: 'presentations',
+          title: 'presentations/',
+          desc: '40 個婚禮視頻展示項目索引',
+          icon: '🎬',
+          x: 60,
+          y: 540,
+          w: 200,
+          details: {
+            count: '40 個主題',
+            chapters: '每個 6 章節結構',
+            tech: 'TypeScript + React + Vite'
+          }
+        },
+        {
+          id: 'presentation-detail',
+          type: 'presentations',
+          title: '單一專案結構',
+          desc: '每個展示為獨立 Vite + React 專案',
+          icon: '📁',
+          x: 280,
+          y: 540,
+          w: 200,
+          details: {
+            chapters: 'chapters/ (6章節)',
+            registry: 'chapters.ts + types.ts',
+            hooks: 'useStepper.ts'
+          }
+        },
+        {
+          id: 'presentation-build',
+          type: 'presentations',
+          title: 'Build & Deploy',
+          desc: '生產環境建構',
+          icon: '🚀',
+          x: 500,
+          y: 540,
+          w: 160,
+          details: {
+            output: 'dist/assets/*-*.js',
+            base: '/presentations/XX-name/',
+            deployment: 'GitHub Pages'
+          }
+        },
+
+        // === ASSETS LAYER ===
+        {
+          id: 'assets-header',
+          type: 'section',
+          title: '靜態資源',
+          x: 50,
+          y: 700
+        },
+        {
+          id: 'image-assets',
+          type: 'assets',
+          title: 'image/',
+          desc: '品牌圖片資源',
+          icon: '🖼️',
+          x: 60,
+          y: 740,
+          w: 160,
+          details: {
+            files: 'Logo、證書套顏色、款式預覽圖',
+            formats: 'PNG + WebP',
+            optimized: '響應式圖片'
+          }
+        },
+        {
+          id: 'js-library',
+          type: 'assets',
+          title: 'js library/',
+          desc: '第三方 JavaScript 庫',
+          icon: '📦',
+          x: 240,
+          y: 740,
+          w: 180,
+          details: {
+            libraries: 'heic2any, JSZip, FileSaver',
+            cdn: 'Font Awesome, Google Fonts, Swiper.js'
+          }
+        },
+
+        // === SCRIPTS LAYER ===
+        {
+          id: 'scripts-header',
+          type: 'section',
+          title: '自動化腳本',
+          x: 50,
+          y: 880
+        },
+        {
+          id: 'scripts-seo',
+          type: 'scripts',
+          title: 'SEO 腳本',
+          desc: '結構化數據、Canonical、sitemap',
+          icon: '🔍',
+          x: 60,
+          y: 920,
+          w: 160,
+          details: {
+            scripts: 'add_org_schema, add_breadcrumb, fix_canonical, generate_sitemap'
+          }
+        },
+        {
+          id: 'scripts-content',
+          type: 'scripts',
+          title: '內容管理腳本',
+          desc: '批量處理HTML、修復問題',
+          icon: '⚙️',
+          x: 240,
+          y: 920,
+          w: 160,
+          details: {
+            scripts: 'fix_json_ld, fix_medium_issues, add_sticky_bar, remove_unused_fa'
+          }
+        },
+        {
+          id: 'scripts-optimize',
+          type: 'scripts',
+          title: '優化腳本',
+          desc: '效能優化、圖片壓縮',
+          icon: '⚡',
+          x: 420,
+          y: 920,
+          w: 160,
+          details: {
+            scripts: 'optimize_openings, rank_articles'
+          }
+        },
+
+        // === TESTS LAYER ===
+        {
+          id: 'tests-header',
+          type: 'section',
+          title: '測試系統',
+          x: 50,
+          y: 1060
+        },
+        {
+          id: 'playwright-tests',
+          type: 'tests',
+          title: 'Playwright Tests',
+          desc: '端對端自動化測試',
+          icon: '🧪',
+          x: 60,
+          y: 1100,
+          w: 180,
+          details: {
+            files: 'homepage.spec.ts, mobile.spec.ts',
+            devices: 'Mobile (iPhone 12), Desktop, Tablet (iPad)',
+            config: 'playwright.config.js'
+          }
+        },
+        {
+          id: 'test-runner',
+          type: 'tests',
+          title: '測試執行',
+          desc: 'npm scripts 測試命令',
+          icon: '▶️',
+          x: 260,
+          y: 1100,
+          w: 160,
+          details: {
+            commands: 'npm test, npm run test:mobile, npm run test:headed'
+          }
+        }
+      ],
+
+      flows: [
+        // GitHub Pages to main pages
+        { from: 'github-pages', to: 'index-html', label: '部署' },
+        { from: 'github-pages', to: 'v2-html', label: '' },
+        { from: 'github-pages', to: 'poster-html', label: '' },
+        { from: 'github-pages', to: 'heic-converter', label: '' },
+
+        // Blog flows
+        { from: 'github-pages', to: 'blog-index', label: '部署' },
+        { from: 'blog-index', to: 'blog-articles', label: '420+ 文章' },
+        { from: 'blog-articles', to: 'article-schema', label: 'SEO' },
+
+        // Presentations flows
+        { from: 'github-pages', to: 'presentations-index', label: '部署' },
+        { from: 'presentations-index', to: 'presentation-detail', label: '40 專案' },
+        { from: 'presentation-detail', to: 'presentation-build', label: '建構' },
+
+        // Scripts to content
+        { from: 'scripts-seo', to: 'blog-articles', label: '批量更新' },
+        { from: 'scripts-content', to: 'blog-articles', label: '批量更新' },
+        { from: 'scripts-optimize', to: 'blog-articles', label: '優化' },
+
+        // Tests flows
+        { from: 'playwright-tests', to: 'test-runner', label: '執行' },
+        { from: 'test-runner', to: 'index-html', label: '測試' },
+        { from: 'test-runner', to: 'blog-index', label: '' },
+        { from: 'test-runner', to: 'v2-html', label: '' }
+      ]
+    };
+
+    // State
+    let scale = 1;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0 };
+
+    const canvas = document.getElementById('canvas');
+    const tooltip = document.getElementById('tooltip');
+    const zoomLevelEl = document.getElementById('zoom-level');
+
+    // Render Functions
+    function renderSVG() {
+      const width = window.innerWidth;
+      const height = window.innerHeight - 64;
+
+      let svg = `<svg width="${width}" height="${height}" style="display:block;">`;
+
+      // Defs for markers
+      svg += `
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+          </marker>
+          <marker id="arrowhead-secondary" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#e94560"/>
+          </marker>
+        </defs>
+      `;
+
+      // Render flow lines first (behind cards)
+      architecture.flows.forEach(flow => {
+        const fromNode = architecture.nodes.find(n => n.id === flow.from);
+        const toNode = architecture.nodes.find(n => n.id === flow.to);
+
+        if (fromNode && toNode) {
+          const x1 = fromNode.x + fromNode.w / 2;
+          const y1 = fromNode.y + 40;
+          const x2 = toNode.x + toNode.w / 2;
+          const y2 = toNode.y;
+
+          const midY = (y1 + y2) / 2;
+          const d = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+
+          svg += `<path class="flow-line" d="${d}" marker-end="url(#arrowhead)"/>`;
+
+          if (flow.label) {
+            const labelX = (x1 + x2) / 2;
+            const labelY = midY - 8;
+            svg += `<text x="${labelX}" y="${labelY}" text-anchor="middle" font-size="10" fill="#6b7280" font-family="Inter, sans-serif">${flow.label}</text>`;
+          }
+        }
+      });
+
+      svg += '</svg>';
+      canvas.innerHTML = svg;
+    }
+
+    function renderCards() {
+      architecture.nodes.forEach(node => {
+        if (node.type === 'section') {
+          const label = document.createElement('div');
+          label.className = 'section-label';
+          label.textContent = node.title;
+          label.style.left = `${node.x}px`;
+          label.style.top = `${node.y}px`;
+          canvas.appendChild(label);
+          return;
+        }
+
+        const card = document.createElement('div');
+        card.className = `card card--${node.type}`;
+        card.style.left = `${node.x}px`;
+        card.style.top = `${node.y}px`;
+        card.style.width = `${node.w}px`;
+
+        let tagsHtml = '';
+        if (node.details) {
+          if (node.details.categories) {
+            tagsHtml = node.details.categories.split(',').slice(0, 3).map(c =>
+              `<span class="card-tag">${c.trim()}</span>`
+            ).join('');
+          }
+          if (node.details.features) {
+            tagsHtml = node.details.features.slice(0, 3).map(f =>
+              `<span class="card-tag">${f}</span>`
+            ).join('');
+          }
+          if (node.details.tech) {
+            tagsHtml = `<span class="card-tag">${node.details.tech}</span>`;
+          }
+        }
+
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-icon">${node.icon}</div>
+            <div class="card-title">${node.title}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-desc">${node.desc}</div>
+            ${tagsHtml ? `<div style="margin-top:8px;">${tagsHtml}</div>` : ''}
+          </div>
+        `;
+
+        // Hover events
+        card.addEventListener('mouseenter', (e) => showTooltip(e, node));
+        card.addEventListener('mousemove', (e) => moveTooltip(e));
+        card.addEventListener('mouseleave', hideTooltip);
+
+        canvas.appendChild(card);
+      });
+    }
+
+    function showTooltip(e, node) {
+      let html = `<strong>${node.title}</strong><br><br>`;
+
+      if (node.details) {
+        Object.entries(node.details).forEach(([key, value]) => {
+          html += `<div style="margin:4px 0;"><strong>${key}:</strong> ${value}</div>`;
+        });
+      }
+
+      tooltip.innerHTML = html;
+      tooltip.classList.add('visible');
+      moveTooltip(e);
+    }
+
+    function moveTooltip(e) {
+      tooltip.style.left = `${e.clientX + 16}px`;
+      tooltip.style.top = `${e.clientY + 16}px`;
+    }
+
+    function hideTooltip() {
+      tooltip.classList.remove('visible');
+    }
+
+    // Transform
+    function updateTransform() {
+      canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+      zoomLevelEl.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    // Event Listeners
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      scale = Math.max(0.3, Math.min(2, scale + delta));
+      updateTransform();
+    });
+
+    canvas.addEventListener('mousedown', (e) => {
+      if (e.target === canvas || e.target.tagName === 'svg') {
+        isDragging = true;
+        dragStart = { x: e.clientX - panX, y: e.clientY - panY };
+        canvas.style.cursor = 'grabbing';
+      }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        panX = e.clientX - dragStart.x;
+        panY = e.clientY - dragStart.y;
+        updateTransform();
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      isDragging = false;
+      canvas.style.cursor = 'grab';
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      isDragging = false;
+      canvas.style.cursor = 'grab';
+    });
+
+    // Zoom controls
+    document.getElementById('zoom-in').addEventListener('click', () => {
+      scale = Math.min(2, scale + 0.2);
+      updateTransform();
+    });
+
+    document.getElementById('zoom-out').addEventListener('click', () => {
+      scale = Math.max(0.3, scale - 0.2);
+      updateTransform();
+    });
+
+    document.getElementById('zoom-reset').addEventListener('click', () => {
+      scale = 1;
+      panX = 0;
+      panY = 0;
+      updateTransform();
+    });
+
+    // View toggle
+    document.getElementById('view-flow').addEventListener('click', () => {
+      document.getElementById('view-flow').classList.add('active');
+      document.getElementById('view-structure').classList.remove('active');
+      // In a full implementation, this would switch between flow and structure views
+    });
+
+    document.getElementById('view-structure').addEventListener('click', () => {
+      document.getElementById('view-structure').classList.add('active');
+      document.getElementById('view-flow').classList.remove('active');
+    });
+
+    // Initialize
+    function init() {
+      renderSVG();
+      renderCards();
+      updateTransform();
+    }
+
+    init();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      renderSVG();
+    });
+  </script>
+</body>
+</html>
