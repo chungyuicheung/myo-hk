@@ -44,6 +44,33 @@ test.describe('My O! 首頁功能測試', () => {
     await expect(whatsappLink).toBeVisible();
   });
 
+  test('訂購表單連結應該存在且正確', async ({ page }) => {
+    await page.goto('/');
+
+    const formLinks = page.locator('a[href*="docs.google.com/forms/d/e/1FAIpQLScqX5Fq6dA50bSGzbFa14pFJ5RH3FX3PENF-kUPhuBJluCNVA"]');
+
+    // 三個入口：Hero、#contact 卡片、FAQ 行內
+    await expect(formLinks).toHaveCount(3);
+
+    // 全部新視窗開啟且帶 noopener
+    const count = await formLinks.count();
+    for (let i = 0; i < count; i++) {
+      await expect(formLinks.nth(i)).toHaveAttribute('target', '_blank');
+      await expect(formLinks.nth(i)).toHaveAttribute('rel', /noopener/);
+    }
+
+    // Hero：.hero-section 內可見
+    await expect(page.locator('.hero-section a[href*="docs.google.com/forms"]')).toBeVisible();
+
+    // #contact：第三張卡片，含文案
+    const contactCard = page.locator('#contact .contact-cta-item[href*="docs.google.com/forms"]');
+    await expect(contactCard).toBeVisible();
+    await expect(contactCard).toContainText('填寫網上訂購表單');
+
+    // #faq：行內連結位於預設摺疊的 <details> 內，斷言存在即可
+    await expect(page.locator('#faq a[href*="docs.google.com/forms"]')).toBeAttached();
+  });
+
   test('頁腳應該存在', async ({ page }) => {
     await page.goto('/');
 
