@@ -16,6 +16,10 @@ scripts/
 │   ├── upgrade_to_blogposting.py
 │   ├── fix_canonical_urls.py
 │   ├── fix_blog_titles.py
+│   ├── fix_duplicate_titles.py
+│   ├── expand_descriptions.py
+│   ├── fix_meta_tags.py
+│   ├── test_seo_fixes.py
 │   ├── fix_llms_txt.py
 │   ├── generate_sitemap.py
 │   ├── rank_articles.py
@@ -85,6 +89,10 @@ python3 scripts/add_breadcrumb_schema.py
 python3 scripts/cleanup_json_ld.py
 python3 scripts/fix_canonical_urls.py
 python3 scripts/fix_blog_titles.py
+python3 scripts/fix_duplicate_titles.py
+python3 scripts/expand_descriptions.py [--test]
+python3 scripts/fix_meta_tags.py [--test]
+python3 -m pytest scripts/test_seo_fixes.py -v
 python3 scripts/fix_llms_txt.py
 python3 scripts/rank_articles.py
 python3 scripts/optimize_openings.py
