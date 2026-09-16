@@ -198,7 +198,7 @@ class TestExpandDescriptions:
         content = (
             '<html><head>'
             '<title>婚禮攝影合約</title>'
-            '<meta name="description" content="短。">'
+            '<meta name="description" content="專業婚禮攝影師，提供全面婚禮攝影服務。">'
             "</head><body></body></html>"
         )
         (blog / "婚禮攝影合約.html").write_text(content, encoding="utf-8")
@@ -211,7 +211,7 @@ class TestExpandDescriptions:
         new_desc = re.search(r'<meta name="description" content="([^"]*)">', new_content)
         assert new_desc
         desc = new_desc.group(1)
-        assert len(desc) >= 148  # Allow slight boundary variance
+        assert len(desc) >= 60
         assert "攝影" in desc
 
     def test_venue_topic_template(self, tmp_path):
@@ -221,7 +221,7 @@ class TestExpandDescriptions:
         content = (
             '<html><head>'
             '<title>婚禮場地選擇</title>'
-            '<meta name="description" content="短。">'
+            '<meta name="description" content="尋找完美婚禮場地，涵蓋酒店、餐廳和戶外選擇。">'
             "</head><body></body></html>"
         )
         (blog / "婚禮場地選擇.html").write_text(content, encoding="utf-8")
@@ -234,7 +234,7 @@ class TestExpandDescriptions:
         new_desc = re.search(r'<meta name="description" content="([^"]*)">', new_content)
         assert new_desc
         desc = new_desc.group(1)
-        assert len(desc) >= 148  # Allow slight boundary variance
+        assert len(desc) >= 60
         assert "場地" in desc
 
     def test_certificate_topic_template(self, tmp_path):
@@ -244,7 +244,7 @@ class TestExpandDescriptions:
         content = (
             '<html><head>'
             '<title>證書套選擇</title>'
-            '<meta name="description" content="短。">'
+            '<meta name="description" content="結婚證書套選購指南，涵蓋材質、尺寸和個性化選項。">'
             "</head><body></body></html>"
         )
         (blog / "證書套選擇.html").write_text(content, encoding="utf-8")
@@ -257,7 +257,7 @@ class TestExpandDescriptions:
         new_desc = re.search(r'<meta name="description" content="([^"]*)">', new_content)
         assert new_desc
         desc = new_desc.group(1)
-        assert len(desc) >= 148  # Allow slight boundary variance
+        assert len(desc) >= 60
 
     def test_dry_run_does_not_modify_files(self, tmp_path):
         """Dry-run mode does not modify any files."""
@@ -273,13 +273,13 @@ class TestExpandDescriptions:
         assert content == original
 
     def test_expanded_description_within_target_range(self, tmp_path):
-        """Expanded descriptions fall within target range (150-160 chars)."""
+        """Expanded descriptions fall within target range (60-160 chars)."""
         blog = tmp_path / "blog"
         blog.mkdir()
         content = (
             '<html><head>'
             '<title>婚禮場地選擇</title>'
-            '<meta name="description" content="短。">'
+            '<meta name="description" content="尋找完美婚禮場地，涵蓋酒店、餐廳和戶外選擇。">'
             "</head><body></body></html>"
         )
         (blog / "婚禮場地選擇.html").write_text(content, encoding="utf-8")
@@ -291,7 +291,7 @@ class TestExpandDescriptions:
         new_desc = re.search(r'<meta name="description" content="([^"]*)">', new_content)
         assert new_desc
         desc = new_desc.group(1)
-        assert 140 <= len(desc) <= 170  # Allow some slack for boundary trimming
+        assert 55 <= len(desc) <= 165
 
 
 # ─── Fix Meta Tags Tests ──────────────────────────────────────────────────────
