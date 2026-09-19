@@ -568,7 +568,7 @@
 
     <div id="image-modal" class="modal">
         <span class="close-button">&times;</span>
-        <img class="modal-content" id="modal-image" loading="lazy" width="800" height="600">
+        <img class="modal-content" id="modal-image" alt="產品大圖" loading="lazy" width="800" height="600">
     </div>
 
     <!-- Mobile Sticky Conversion Bar -->
@@ -639,12 +639,15 @@
                         selectedColorInput.value = value;
                         console.log(`Selected color: ${value}`);
 
-                        // 獲取該卡片中圖片的 src 屬性
-                        const imgSrc = this.querySelector('.select-option-image').getAttribute('src');
-                        
+                        // 獲取該卡片中圖片的 src 與 alt 屬性
+                        const sourceImg = this.querySelector('.select-option-image');
+                        const imgSrc = sourceImg.getAttribute('src');
+                        const imgAlt = sourceImg.getAttribute('alt');
+
                         // 顯示 Modal
                         if (imgSrc) {
                             modalImage.src = imgSrc;
+                            modalImage.alt = imgAlt || '結婚證書套預覽';
                             imageModal.style.display = 'flex'; // 顯示 Modal (使用 flex 讓圖片居中)
                         }
 

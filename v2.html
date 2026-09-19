@@ -2140,12 +2140,15 @@ a{color:inherit;text-decoration:none}
                         selectedColorInput.value = value;
                         console.log(`Selected color: ${value}`);
 
-                        // 獲取該卡片中圖片的 src 屬性
-                        const imgSrc = this.querySelector('.select-option-image').src;
-                        
+                        // 獲取該卡片中圖片的 src 與 alt 屬性
+                        const sourceImg = this.querySelector('.select-option-image');
+                        const imgSrc = sourceImg.src;
+                        const imgAlt = sourceImg.getAttribute('alt');
+
                         // 顯示 Modal
                         if (imgSrc) {
                             modalImage.src = imgSrc;
+                            modalImage.alt = imgAlt || '結婚證書套預覽';
                             imageModal.style.display = 'flex'; // 顯示 Modal (使用 flex 讓圖片居中)
                         }
 
@@ -2349,6 +2352,7 @@ a{color:inherit;text-decoration:none}
                 if (img && img.src) {
                     allColorImages.push({
                         src: img.src,
+                        alt: img.alt,
                         index: index
                     });
                 }
@@ -2372,6 +2376,7 @@ a{color:inherit;text-decoration:none}
                 const currentImg = allColorImages[currentImageIndex];
                 if (currentImg) {
                     lightboxImage.src = currentImg.src;
+                    lightboxImage.alt = currentImg.alt || '結婚證書套預覽';
                     lightboxCounter.textContent = `${currentImageIndex + 1} / ${allColorImages.length}`;
 
                     document.querySelectorAll('.lightbox-thumb').forEach((thumb, idx) => {
