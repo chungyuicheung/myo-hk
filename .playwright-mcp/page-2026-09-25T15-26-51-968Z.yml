@@ -1,0 +1,90 @@
+- generic [active] [ref=f2e1]:
+  - button " 下載 PDF" [ref=f2e2] [cursor=pointer]:
+    - generic [ref=f2e3]: 
+    - text: 下載 PDF
+  - generic [ref=f2e4]:
+    - link "My O! Logo My O! 結婚證書套" [ref=f2e5] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f2e6]:
+        - generic [ref=f2e7]:
+          - img "My O! Logo" [ref=f2e9]
+          - generic [ref=f2e10]: My O!
+        - generic [ref=f2e11]: 結婚證書套
+    - generic [ref=f2e12]:
+      - generic [ref=f2e13]:
+        - img "米色證書套" [ref=f2e14]
+        - generic [ref=f2e15]: 米色 · 亞麻布
+      - generic [ref=f2e18]:
+        - img "藍色證書套" [ref=f2e19]
+        - generic [ref=f2e20]: 藍色 · 磨砂珠光
+    - generic [ref=f2e23]: 為人生最重要的一頁，留下最溫柔的觸感
+    - generic [ref=f2e27]:
+      - strong [ref=f2e29]: 精選款式
+      - generic [ref=f2e30]:
+        - generic [ref=f2e31]:
+          - img "款式1" [ref=f2e32]
+          - generic [ref=f2e33]: 簡約經典
+        - generic [ref=f2e34]:
+          - img "款式2" [ref=f2e35]
+          - generic [ref=f2e36]: 浪漫花卉
+        - generic [ref=f2e37]:
+          - img "款式3" [ref=f2e38]
+          - generic [ref=f2e39]: 時尚幾何
+        - generic [ref=f2e40]:
+          - img "款式4" [ref=f2e41]
+          - generic [ref=f2e42]: 夢幻元素
+        - generic [ref=f2e43]:
+          - img "款式5" [ref=f2e44]
+          - generic [ref=f2e45]: 愛在框中
+    - generic [ref=f2e46]:
+      - generic [ref=f2e47]:
+        - generic [ref=f2e48]: 💖
+        - generic [ref=f2e49]:
+          - generic [ref=f2e50]: 完美尺寸
+          - generic [ref=f2e51]: 適用香港婚姻登記處 A4 證書約 30.7cm × 22.6cm
+      - generic [ref=f2e52]:
+        - generic [ref=f2e53]: ✨
+        - generic [ref=f2e54]:
+          - generic [ref=f2e55]: 高質感封面
+          - generic [ref=f2e56]: 硬殼包覆磨砂珠光或亞麻布紋手感細緻
+      - img "米色藍色组合" [ref=f2e60]
+      - generic [ref=f2e61]:
+        - generic [ref=f2e62]: 🛡️
+        - generic [ref=f2e63]:
+          - generic [ref=f2e64]: 穩妥保護
+          - generic [ref=f2e65]: 厚卡內襯、固定帶防潮防塵
+      - generic [ref=f2e66]:
+        - generic [ref=f2e67]: 🎨
+        - generic [ref=f2e68]:
+          - generic [ref=f2e69]: 精緻印刷
+          - generic [ref=f2e70]: 熱轉印燙印工藝呈現燙金/銀質感
+    - generic [ref=f2e71]:
+      - generic [ref=f2e72]: 客製化您的愛
+      - text: 從新人名字、結婚日期到豐富的設計樣式，我們提供多樣客製化選項。無需自備圖稿，即可打造一份真正專屬、彰顯您們風格的珍貴證書套。
+    - generic [ref=f2e73]:
+      - generic [ref=f2e74]:
+        - generic [ref=f2e75]: 聯絡我們
+        - link " @myo.makeyourown" [ref=f2e76] [cursor=pointer]:
+          - /url: https://www.instagram.com/myo.makeyourown/
+          - generic [ref=f2e77]: 
+          - generic [ref=f2e78]: "@myo.makeyourown"
+        - link " 6379 6410" [ref=f2e79] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=85263796410&text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%E7%B5%90%E5%A9%9A%E8%AD%89%E6%9B%B8%E5%A5%97
+          - generic [ref=f2e80]: 
+          - generic [ref=f2e81]: 6379 6410
+      - generic [ref=f2e82]:
+        - link "Instagram QR Instagram" [ref=f2e83] [cursor=pointer]:
+          - /url: https://www.instagram.com/myo.makeyourown/
+          - generic [ref=f2e84]:
+            - img "Instagram QR" [ref=f2e86]
+            - generic [ref=f2e87]: Instagram
+        - link "WhatsApp QR WhatsApp" [ref=f2e88] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=85263796410&text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%E7%B5%90%E5%A9%9A%E8%AD%89%E6%9B%B8%E5%A5%97
+          - generic [ref=f2e89]:
+            - img "WhatsApp QR" [ref=f2e91]
+            - generic [ref=f2e92]: WhatsApp
+        - link "Website QR 網站" [ref=f2e93] [cursor=pointer]:
+          - /url: https://myo-makeyourown.pages.dev
+          - generic [ref=f2e94]:
+            - img "Website QR" [ref=f2e96]
+            - generic [ref=f2e97]: 網站

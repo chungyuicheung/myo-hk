@@ -1,0 +1,166 @@
+- generic [active] [ref=f4e1]:
+  - navigation [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - img "網站首頁" [ref=f4e5]
+        - generic [ref=f4e6]: My O!
+        - text: 專屬結婚證書套
+      - generic [ref=f4e7]:
+        - link "產品概覽" [ref=f4e8] [cursor=pointer]:
+          - /url: "#product-overview"
+        - link "款式與設計" [ref=f4e9] [cursor=pointer]:
+          - /url: "#designs"
+        - link "教學指南" [ref=f4e10] [cursor=pointer]:
+          - /url: ./blog/
+        - link "聯絡我們" [ref=f4e11] [cursor=pointer]:
+          - /url: "#contact"
+        - link "宣傳單張" [ref=f4e12] [cursor=pointer]:
+          - /url: ./poster.html
+  - main [ref=f4e15]:
+    - generic [ref=f4e17]:
+      - img "My O! logo" [ref=f4e19]
+      - heading "珍藏您的愛情， 從一份證書套開始。💖" [level=1] [ref=f4e20]: 珍藏您的愛情，從一份證書套開始。💖
+      - paragraph [ref=f4e21]: 您的結婚證書，承載著一生一世的誓言。我們為您打造設計師級結婚證書套，讓這份愛情的見證，永恆閃耀。
+      - link "立即聯絡我們" [ref=f4e22] [cursor=pointer]:
+        - /url: "#contact"
+      - link "或填寫網上訂購表單 →" [ref=f4e23] [cursor=pointer]:
+        - /url: https://docs.google.com/forms/d/e/1FAIpQLScqX5Fq6dA50bSGzbFa14pFJ5RH3FX3PENF-kUPhuBJluCNVA/viewform
+      - generic [ref=f4e24]:
+        - paragraph [ref=f4e25]: 聯絡我們：
+        - paragraph [ref=f4e26]: myo.makeyourown
+        - generic [ref=f4e27]:
+          - link "Instagram" [ref=f4e28] [cursor=pointer]:
+            - /url: https://www.instagram.com/myo.makeyourown/
+          - link "WhatsApp" [ref=f4e31] [cursor=pointer]:
+            - /url: https://api.whatsapp.com/send?phone=85263796410&text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%BE%9E%E4%BD%A0%E5%80%91%E7%B6%B2%E7%AB%99%E4%B8%8A%E7%9C%8B%E5%88%B0%E9%80%99%E5%80%8B%E7%94%A2%E5%93%81%EF%BC%81%E6%9C%89%E8%88%88%E8%B6%A3%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A%EF%BC%81
+    - generic [ref=f4e35]:
+      - heading "選擇您的專屬款式與設計" [level=2] [ref=f4e36]
+      - paragraph [ref=f4e37]: 從簡約優雅到浪漫古典，總有一款能完美襯托您們的愛情故事。在此您可以選擇證書套的顏色與質地，以及豐富的圖案設計樣式。
+      - generic [ref=f4e38]:
+        - heading "選擇證書套顏色 | Select the Color of the Certificate Cover *" [level=3] [ref=f4e39]
+        - generic [ref=f4e40]:
+          - generic [ref=f4e41] [cursor=pointer]:
+            - generic [ref=f4e42]: 米色 Beige ｜亞麻布 Linen Texture
+            - img "米色證書套預覽" [ref=f4e47]
+          - generic [ref=f4e48] [cursor=pointer]:
+            - generic [ref=f4e49]: 藍色 Blue ｜磨砂珠光 Frosted Pearl
+            - img "藍色證書套預覽" [ref=f4e54]
+      - generic [ref=f4e55]:
+        - heading "選擇證書套設計樣式 | Support English/Chinese Character *" [level=3] [ref=f4e56]
+        - generic [ref=f4e58]:
+          - generic [ref=f4e60] [cursor=pointer]:
+            - img "款式1" [ref=f4e63]
+            - generic [ref=f4e64]: 款式1｜Cert Style 1
+            - paragraph [ref=f4e65]: 簡潔線條，永恆經典。
+          - generic [ref=f4e67] [cursor=pointer]:
+            - img "款式2" [ref=f4e70]
+            - generic [ref=f4e71]: 款式2｜Cert Style 2
+            - paragraph [ref=f4e72]: 以花卉圖案點綴，寓意愛情如花般綻放。
+          - generic [ref=f4e74] [cursor=pointer]:
+            - img "款式3" [ref=f4e77]
+            - generic [ref=f4e78]: 款式3｜Cert Style 3
+            - paragraph [ref=f4e79]: 時尚幾何圖形，展現現代感。
+          - generic [ref=f4e81] [cursor=pointer]:
+            - img "款式4" [ref=f4e84]
+            - generic [ref=f4e85]: 款式4｜Cert Style 4
+            - paragraph [ref=f4e86]: 融入夢幻元素，充滿魔法。
+          - generic [ref=f4e88] [cursor=pointer]:
+            - img "款式5" [ref=f4e91]
+            - generic [ref=f4e92]: 款式5｜Cert Style 5
+            - paragraph [ref=f4e93]: 更多風格選擇，等待您發掘。
+    - generic [ref=f4e95]:
+      - heading "專屬證書套：您的愛情故事，完美珍藏" [level=2] [ref=f4e96]
+      - paragraph [ref=f4e97]: 我們為您打造的結婚證書套，不僅是承載您一生誓言的優雅保護，更是您獨一無二愛情故事的永恆見證。
+      - generic [ref=f4e98]:
+        - img "結婚證書套示意圖" [ref=f4e101]
+        - generic [ref=f4e102]:
+          - heading "產品特點 | Product Highlights" [level=3] [ref=f4e103]
+          - list [ref=f4e104]:
+            - listitem [ref=f4e105]:
+              - generic [ref=f4e106]: 💖
+              - generic [ref=f4e107]:
+                - strong [ref=f4e108]: 完美尺寸：
+                - text: 適用香港婚姻登記處 A4 證書。
+                - generic [ref=f4e109]: 約 30.7cm(高) × 22.6cm(闊)
+            - listitem [ref=f4e110]:
+              - generic [ref=f4e111]: ✨
+              - generic [ref=f4e112]:
+                - strong [ref=f4e113]: 高質感封面：：
+                - text: 硬殼包覆磨砂珠光或亞麻布紋，手感細緻。
+            - listitem [ref=f4e114]:
+              - generic [ref=f4e115]: 🛡️
+              - generic [ref=f4e116]:
+                - strong [ref=f4e117]: 穩妥保護：：
+                - text: 厚卡內襯、固定帶，防潮防塵。
+            - listitem [ref=f4e118]:
+              - generic [ref=f4e119]: 🎨
+              - generic [ref=f4e120]:
+                - strong [ref=f4e121]: 精緻印刷：：
+                - text: 熱轉印（燙印）工藝，呈現燙金/銀質感。
+          - heading "個性化您的愛 | Personalize Your Love" [level=3] [ref=f4e122]
+          - paragraph [ref=f4e123]:
+            - text: 從
+            - strong [ref=f4e124]: 新人名字、結婚日期
+            - text: 到
+            - strong [ref=f4e125]: 豐富的設計樣式
+            - text: ，我們提供多樣客製化選項。無需自備圖稿，即可打造一份真正專屬、彰顯您們風格的珍貴證書套。
+    - generic [ref=f4e127]:
+      - heading "常見問題" [level=2] [ref=f4e128]
+      - paragraph [ref=f4e129]: 關於結婚證書套，您可能想了解的問題：
+      - group [ref=f4e130] [cursor=pointer]:
+        - generic "證書套的尺寸是否適合香港婚姻登記處的 A4 結婚證書？ ▼" [ref=f4e131]:
+          - generic [ref=f4e132]: 證書套的尺寸是否適合香港婚姻登記處的 A4 結婚證書？
+          - generic [ref=f4e133]: ▼
+      - group [ref=f4e134] [cursor=pointer]:
+        - generic "可以在證書套上印製哪些文字？ ▼" [ref=f4e135]:
+          - generic [ref=f4e136]: 可以在證書套上印製哪些文字？
+          - generic [ref=f4e137]: ▼
+      - group [ref=f4e138] [cursor=pointer]:
+        - generic "亞麻布和磨砂珠光材質有什麼分別？ ▼" [ref=f4e139]:
+          - generic [ref=f4e140]: 亞麻布和磨砂珠光材質有什麼分別？
+          - generic [ref=f4e141]: ▼
+      - group [ref=f4e142] [cursor=pointer]:
+        - generic "訂製一個證書套需要多久時間？ ▼" [ref=f4e143]:
+          - generic [ref=f4e144]: 訂製一個證書套需要多久時間？
+          - generic [ref=f4e145]: ▼
+      - group [ref=f4e146] [cursor=pointer]:
+        - generic "如何清潔和保養結婚證書套？ ▼" [ref=f4e147]:
+          - generic [ref=f4e148]: 如何清潔和保養結婚證書套？
+          - generic [ref=f4e149]: ▼
+      - group [ref=f4e150] [cursor=pointer]:
+        - generic "證書套的價格是多少？ ▼" [ref=f4e151]:
+          - generic [ref=f4e152]: 證書套的價格是多少？
+          - generic [ref=f4e153]: ▼
+      - group [ref=f4e154] [cursor=pointer]:
+        - generic "訂購流程是怎樣的？ ▼" [ref=f4e155]:
+          - generic [ref=f4e156]: 訂購流程是怎樣的？
+          - generic [ref=f4e157]: ▼
+      - group [ref=f4e158] [cursor=pointer]:
+        - generic "可以只訂購一個證書套嗎？ ▼" [ref=f4e159]:
+          - generic [ref=f4e160]: 可以只訂購一個證書套嗎？
+          - generic [ref=f4e161]: ▼
+      - link "查看全部常見問題 →" [ref=f4e163] [cursor=pointer]:
+        - /url: faq.html
+    - generic [ref=f4e165]:
+      - heading "聯絡我們" [level=2] [ref=f4e166]
+      - paragraph [ref=f4e167]: 有任何疑問或需要客製化協助嗎？歡迎隨時與我們聯繫，我們將竭誠為您服務。
+      - generic [ref=f4e168]:
+        - paragraph [ref=f4e169]: 準備好定制您的專屬證書套了嗎？ 立即透過以下方式聯絡我們！✨
+        - generic [ref=f4e170]:
+          - link "透過 Instagram 訊息我們" [ref=f4e171] [cursor=pointer]:
+            - /url: https://www.instagram.com/myo.makeyourown/
+          - link "透過 WhatsApp 聯絡我們" [ref=f4e175] [cursor=pointer]:
+            - /url: https://api.whatsapp.com/send?phone=85263796410&text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%BE%9E%E4%BD%A0%E5%80%91%E7%B6%B2%E7%AB%99%E4%B8%8A%E7%9C%8B%E5%88%B0%E9%80%99%E5%80%8B%E7%94%A2%E5%93%81%EF%BC%81%E6%9C%89%E8%88%88%E8%B6%A3%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A%EF%BC%81
+          - link "填寫網上訂購表單" [ref=f4e179] [cursor=pointer]:
+            - /url: https://docs.google.com/forms/d/e/1FAIpQLScqX5Fq6dA50bSGzbFa14pFJ5RH3FX3PENF-kUPhuBJluCNVA/viewform
+            - generic [aria-hidden] [ref=f4e180]: 📋
+  - contentinfo [ref=f4e182]:
+    - generic [ref=f4e183]:
+      - paragraph [ref=f4e184]: © 2025 愛的見證. 版權所有。
+      - generic [ref=f4e185]:
+        - link "隱私政策" [ref=f4e186] [cursor=pointer]:
+          - /url: privacy.html
+        - link "服務條款" [ref=f4e187] [cursor=pointer]:
+          - /url: terms.html
+        - link "常見問題" [ref=f4e188] [cursor=pointer]:
+          - /url: faq.html
