@@ -32,10 +32,25 @@ test.describe('Lighthouse audit fixes', () => {
   // TEST 2: Image aspect ratio correctness
   // ====================================================
   test('design style images should maintain natural aspect ratio', async ({ page }) => {
-    await page.goto('/');
+    // 'load' rather than the default, so the deferred preload+onload stylesheets
+    // have been applied; measuring earlier reports unstyled box dimensions.
+    await page.goto('/', { waitUntil: 'load' });
 
     // Wait for Swiper images to load
     await page.waitForSelector('.design-style-card img', { timeout: 10000 });
+    // waitForSelector resolves on DOM attachment, not on image load.
+    await page.waitForFunction(
+      () =>
+        Array.from(document.querySelectorAll<HTMLImageElement>('.design-style-card img')).every(
+          (img) => img.complete
+        ),
+      undefined,
+      { timeout: 10000 }
+    );
+    // Let a layout pass run so the measured box reflects the final styles.
+    await page.evaluate(
+      () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    );
 
     const images = page.locator('.design-style-card img');
     const count = await images.count();
